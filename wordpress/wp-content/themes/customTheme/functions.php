@@ -1,21 +1,38 @@
 <?php
 
-function book_post_type(){
+
+function project_post_type(){
     $args = array(
-        'label'=> 'Books',
-        'public'=> true
+        'label'=> 'Project',
+        'public'=> true,
+        'hierarchical' => false,
+        'menu_icon' => 'dashicons-portfolio',
+        'supports' => array('title','thumbnail','editor','author')
     );
-    register_post_type('book',$args);
+    register_post_type('project',$args);
 
     $taxArgs = array(
-        'public'=> true,
-        'label'=> 'Genre',
-        'hierarchical' => false
+        'label'=> 'Project Type',
+        'hierarchical' => true,
+        'name'=>'project_type',
+        'object_type'=>'project'
     );
-    register_taxonomy('genre','book',$taxArgs);
+    register_taxonomy('project-type','project',$taxArgs);
+
+
+    $taxArgs1 = array(
+        'label'=> 'Project Skill',
+        'hierarchical' => false,
+        'name'=>'project_skill',
+        'object_type'=>'project'
+    );
+    register_taxonomy('project-skill','project',$taxArgs1);
+
 }
 
-add_action('init','book_post_type');
+add_action('init','project_post_type');
+
+
 
 
 ?>
