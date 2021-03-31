@@ -1,6 +1,5 @@
 <?php
 
-
 function project_post_type(){
     $args = array(
         'label'=> 'Project',
@@ -32,7 +31,13 @@ function project_post_type(){
 
 add_action('init','project_post_type');
 
+wp_set_post_terms(12,$project_type);
+wp_set_post_terms(12,$project_skill);
 
-
+if ( is_object_in_term(12, 'project_type') ) :
+    echo 'YES';
+else :
+    echo 'NO';
+endif;
 
 ?>
